@@ -10,8 +10,18 @@
       <h1><em>CSC465 Final Project D3 Visulization</em></h1>
       <div class="row">
         <div id="ppt" class="col-md-2">
+          <a href="#" class="thumbnail">
+            <p>
+            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+            </p>
+          </a>
+          <a href="#" class="thumbnail">
+            <p>
+            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+            </p>
+          </a>
         </div>
-        <div id="svg" class="col-md-8">
+        <div id="svg" class="col-md-8 well">
         </div>
         <div id="opt" class="btn-group-vertical col-md-2" role="group" aria-label="btn-group">
           <button type="button" class="btn btn-primary">Population</button>
@@ -43,10 +53,17 @@
         .style("fill",color);
 
       d3.json("./data/chicagogeo.json", function(chicago) {
+
+        chicago.features.forEach(function(tract){
+          tract.properties.value = Math.round(100*Math.random());
+          tract.properties.color = d3.interpolate("#ffffcc", "#800026")(tract.properties.value/100);
+        });
+
         svg.selectAll(".state")
           .data(chicago.features)
           .enter()
           .append("path")
+          .style("fill",function(d){return d.properties.color;})
           .attr("d", path);
       });
 
