@@ -42,7 +42,7 @@
         .attr("height", height)
         .style("fill",color);
 
-      d3.json("/data/chicagogeo.json", function(chicago) {
+      d3.json("./data/chicagogeo.json", function(chicago) {
         svg.selectAll(".state")
           .data(chicago.features)
           .enter()
