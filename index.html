@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div id="wrapper" class="container">
+      <h1><em>CSC465 Final Project D3 Visulization</em></h1>
+      <div class="row">
+        <div id="ppt" class="col-md-2">
+        </div>
+        <div id="svg" class="col-md-8">
+        </div>
+        <div id="opt" class="btn-group-vertical col-md-2" role="group" aria-label="btn-group">
+          <button type="button" class="btn btn-primary">Population</button>
+          <button type="button" class="btn btn-primary">Home Unit</button>
+          <button type="button" class="btn btn-primary">Education</button>
+          <button type="button" class="btn btn-primary">Income</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>
+
+      var width = 1000, height = 700;
+      var color = d3.hcl(-97, 32, 52);
+
+      var projection = d3.geo.mercator()
+        .center([-87.6847,41.8369])
+        .scale(70000)
+        .translate([width/2,height/2]);
+
+      var path = d3.geo.path()
+        .projection(projection);
+
+      var svg = d3.select("#svg").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill",color);
+
+      d3.json("/data/chicagogeo.json", function(chicago) {
+        svg.selectAll(".state")
+          .data(chicago.features)
+          .enter()
+          .append("path")
+          .attr("d", path);
+      });
+
+      d3.select(self.frameElement).style("height", height + "px");
+
+    </script>
+  </body>
+</html>

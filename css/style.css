@@ -1,0 +1,8 @@
+#wrapper {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+path:hover {
+  opacity: 0.3;
+}
