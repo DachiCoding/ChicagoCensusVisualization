@@ -12,11 +12,13 @@
         <div id="ppt" class="col-md-2">
           <a href="#" class="thumbnail">
             <p>
+            Show individual tract details on hover
             Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
             </p>
           </a>
-          <a href="#" class="thumbnail">
+          <a id="legend" href="#" class="thumbnail">
             <p>
+            Show color scale legend
             Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
             </p>
           </a>
@@ -56,7 +58,7 @@
 
         chicago.features.forEach(function(tract){
           tract.properties.value = Math.round(100*Math.random());
-          tract.properties.color = d3.interpolate("#ffffcc", "#800026")(tract.properties.value/100);
+          tract.properties.color = d3.interpolate("#ffffcc", "#ff7f0e")(tract.properties.value/100);
         });
 
         svg.selectAll(".state")
@@ -68,6 +70,7 @@
       });
 
       d3.select(self.frameElement).style("height", height + "px");
+
 
     </script>
   </body>
