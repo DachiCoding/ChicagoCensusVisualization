@@ -1,8 +1,8 @@
 import csv
 import json
 
-csvpath = "./data/datause1.csv"
-jsonpath = "./data/datause1.json"
+csvpath = "./data/datause1filtered.csv"
+jsonpath = "./data/datause1filtered.json"
 
 jsonData=[]
 headers=[

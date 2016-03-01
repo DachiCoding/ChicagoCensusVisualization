@@ -78,10 +78,24 @@
         .attr("height", height)
         .style("fill",color);
 
+      var censusData = {};
+
+      d3.json("./data/datause1filtered.json",function(stat){
+        censusData = stat;
+      });
+
+      var index = 0;
+
       d3.json("./data/chicagogeo.json", function(chicago) {
         chicago.features.forEach(function(tract){
-          tract.properties.value = Math.round(100*Math.random());
-          tract.properties.color = d3.interpolate("#ffffcc", "#ff7f0e")(tract.properties.value/100);
+          if(tract.properties.geoid10 == censusData[index].censusTract){
+            tract.properties.changeOfPop = censusData[index].Change_Population;
+            index += 1;
+          } else {
+            tract.properties.changeOfPop = 0;
+          }
+
+          tract.properties.color = d3.interpolate("#003366", "#cc0000")(tract.properties.changeOfPop*5);
         });
 
         function mouseOver(){
