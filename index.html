@@ -7,22 +7,18 @@
   </head>
   <body>
     <div id="wrapper" class="container">
-      <h1>CSC465 Final Project D3 Visualization</h1>
+      <h1>CSC465 Group 9 Final Project D3 Visualization</h1>
       <div class="row">
         <div id="detail" class="col-md-2">
-          <a href="tooltip" class="thumbnail">
+          <a href="#" class="thumbnail">
             <p>
-            Show each tract details 
-            Show each tract details 
-            Show each tract details 
-            Show each tract details 
-            Show each tract details 
-            Show each tract details 
+            Tract details:
+            <div id="tooltip">
+            </div>
             </p>
           </a>
-          <a id="legend" href="#" class="thumbnail">
+          <a href="#" class="thumbnail">
             <p>
-            Show color scale legend
             Show color scale legend
             Show color scale legend
             Show color scale legend
@@ -30,18 +26,16 @@
             Show color scale legend
             </p>
           </a>
-          <a id="legend" href="#" class="thumbnail">
+          <a href="#" class="thumbnail">
             <p>
-            Show stats explanation 
-            Show stats explanation
-            Show stats explanation
-            Show stats explanation
-            Show stats explanation
-            Show stats explanation
+            Tract Stat Description: 
+            <div id="statDesc">
+            </div>
             </p>
           </a>
         </div>
         <div id="svg" class="col-md-8 well">
+          <h3>Choropleth for <span id="statName">Change_Population</span></h3>
         </div>
         <div id="option" class="btn-group-vertical col-md-2" role="group" aria-label="btn-group">
           <button id="stat1" type="button" class="btn btn-primary">Population</button>
@@ -84,16 +78,23 @@
       });
 
       var censusVarMap = {
-        "stat1": "Change_Population",
-        "stat2": "Change_VacantUnits",
-        "stat3": "Change_HouseUnits",
-        "stat4": "Change_5To7_or_more_person_household",
-        "stat5": "Change_Builst1939earlier",
-        "stat6": "Change_Built_1940to1959",
-        "stat7": "Y00_PCT_Units_HHIncome_25to50k",
-        "stat8": "Y00_PCT_Units_HHIncome_50to75k",
-        "stat9": "Chg_Educate_HighSchool_orLess",
-        "stat10": "Chg_Educate_SomeCollege"
+        "stat1": {"name":"Change_Population","desc":"Change of population in percentage rate between 2000 and 2013."},
+        "stat2": {"name":"Change_VacantUnits","desc":"Change of vacant unit in percentage rate between 2000 and 2013"},
+        "stat3": {"name":"Change_HouseUnits","desc":"Change of house unit in percentage rate bewteen 2000 and 2013"},
+        "stat4": {"name":"Change_5To7_or_more_person_household","desc":"Change of 5 to 7+ person household in percentage rate bewteen 2000 and 2013"},
+        "stat5": {"name":"Change_Builst1939earlier","desc":"Change of houses built before 1939 in percentage rate bewteen 2000 and 2013"},
+        "stat6": {"name":"Change_Built_1940to1959","desc":"Change of houses butilt from 1940 to 1959 in percentage rate bewteen 2000 and 2013"},
+        "stat7": {"name":"Y00_PCT_Units_HHIncome_25to50k","desc":"Change of house unit with income 25K to 50K in percentage rate bewteen 2000 and 2013"},
+        "stat8": {"name":"Y00_PCT_Units_HHIncome_50to75k","desc":"Change of in house unit with income 50K to 75K percentage rate bewteen 2000 and 2013"},
+        "stat9": {"name":"Chg_Educate_HighSchool_orLess","desc":"Change of people with education level equal or lower than high school in percentage rate bewteen 2000 and 2013"},
+        "stat10":{"name": "Chg_Educate_SomeCollege","desc":"Change of people with college level education in percentage rate bewteen 2000 and 2013"}
+      }
+
+      function updateTractInfo(d){
+        $("#tooltip").html(
+          "<p>" + d.properties.namelsad10 + "</p>" +
+          "<p>Value:" + (d.properties.value*100).toPrecision(2) + "%</p>"
+        );
       }
 
       function updateColorLegend(){
@@ -125,6 +126,7 @@
             .style("fill",function(d){return d.properties.color;})
             .style('stroke', 'black')
             .style('stroke-width', '0.3')
+            .on("mouseover", updateTractInfo)
             .attr("d", path);
         });
       }
@@ -132,7 +134,9 @@
       renderSVG("Change_Population");
 
       $("button").click(function(){
-        renderSVG(censusVarMap[$(this).attr('id')]);
+        renderSVG(censusVarMap[$(this).attr('id')]["name"]);
+        $("#statName").text(censusVarMap[$(this).attr('id')]["name"]);
+        $("#statDesc").text(censusVarMap[$(this).attr('id')]["desc"]);
       });
 
     </script>
