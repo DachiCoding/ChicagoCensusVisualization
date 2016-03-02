@@ -7,7 +7,7 @@
   </head>
   <body>
     <div id="wrapper" class="container">
-      <h1>CSC465 Final Project D3 Visulization</h1>
+      <h1>CSC465 Final Project D3 Visualization</h1>
       <div class="row">
         <div id="detail" class="col-md-2">
           <a href="tooltip" class="thumbnail">
@@ -96,8 +96,16 @@
         "stat10": "Chg_Educate_SomeCollege"
       }
 
+      function updateColorLegend(){
+      }
+
+      function updateStatExplanation(){
+      }
+
       function renderSVG(censusStat){
         var index = 0;
+        d3.selectAll("svg > *").remove();
+
         d3.json("./data/chicagogeo.json", function(chicago) {
           chicago.features.forEach(function(tract){
             if(tract.properties.geoid10 == censusData[index].censusTract){
