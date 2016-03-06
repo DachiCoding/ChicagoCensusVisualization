@@ -17,15 +17,14 @@
             </div>
             </p>
           </a>
-          <a href="#" class="thumbnail">
-            <p>
-            Show color scale legend
-            Show color scale legend
-            Show color scale legend
-            Show color scale legend
-            Show color scale legend
-            </p>
-          </a>
+          <div class="thumbnail">
+            <p>Color scale</p>
+            <p><span class="label rect1"> val &lt -30%  </span></p>
+            <p><span class="label rect2"> -30% ~ 0% </span></p>
+            <p><span class="label rect3"> val near 0%    </span></p>
+            <p><span class="label rect4"> 0% ~ +30%  </span></p>
+            <p><span class="label rect5"> val &gt +30%   </span></p>
+          </div>
           <a href="#" class="thumbnail">
             <p>
             Tract Stat Description: 
@@ -60,7 +59,7 @@
       var width = 1000, height = 700;
       var color = d3.hcl(-97, 32, 52);
       var minColor = "#003366";
-      var maxColor = "#cc0000";
+      var maxColor = "#660000";
 
       var projection = d3.geo.mercator()
         .center([-87.6847,41.8369])

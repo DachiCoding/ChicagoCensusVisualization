@@ -10,3 +10,24 @@ h1 {
 path:hover {
   opacity: 0.3;
 }
+
+.rect1 {
+  background-color: #00ccff;
+}
+
+.rect2 {
+  background-color: #0066cc;
+}
+
+.rect3 {
+  background-color: #003366;
+}
+
+.rect4 {
+  background-color: #331a33;
+}
+
+.rect5 {
+  background-color: #ff0000;
+}
+
