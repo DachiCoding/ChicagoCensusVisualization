@@ -59,7 +59,8 @@
     <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script>
 
-      var width = 1000, height = 700;
+      //var width = 1000, height = 800;
+      var width = window.innerWidth*0.5, height = window.innerHeight*0.8;
       var color = d3.hcl(-97, 32, 52);
       var minColor = "#003366";
       var maxColor = "#660000";
@@ -115,7 +116,15 @@
               tract.properties.value = 0;
             }
 
-            tract.properties.color = d3.interpolate(minColor, maxColor)(tract.properties.value*10);
+            if(tract.properties.value <= 0){
+                maxColor = "#FFFFFF";
+                minColor = "#3399FF";
+                tract.properties.color = d3.interpolate(minColor, maxColor)(tract.properties.value*10);
+            } else {
+                maxColor = "#FFFFFF";
+                minColor = "#FF4D4D";
+                tract.properties.color = d3.interpolate(minColor, maxColor)(-tract.properties.value*10);
+            }
           });
 
           svg.selectAll(".state")
